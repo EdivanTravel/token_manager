@@ -8,20 +8,20 @@ defmodule TokenManagerWeb.Endpoint do
     same_site: "Lax"
   ]
 
-  # Serve arquivos estáticos (se necessário)
+
   plug Plug.Static,
     at: "/",
     from: :token_manager,
     gzip: false,
     only: TokenManagerWeb.static_paths()
 
-  # Code reloading (útil em dev)
+
   if code_reloading? do
     plug Phoenix.CodeReloader
     plug Phoenix.Ecto.CheckRepoStatus, otp_app: :token_manager
   end
 
-  # Middleware padrão para APIs
+ 
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 

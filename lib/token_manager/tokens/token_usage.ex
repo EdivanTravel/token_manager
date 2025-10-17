@@ -3,6 +3,8 @@ defmodule TokenManager.Tokens.TokenUsage do
   import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
+  @derive {Jason.Encoder,
+           only: [:id, :token_id, :user_id, :started_at, :ended_at, :inserted_at, :updated_at]}
   schema "token_usages" do
     field :token_id, :binary_id
     field :user_id, :binary_id

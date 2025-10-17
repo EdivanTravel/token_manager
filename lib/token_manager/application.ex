@@ -11,6 +11,7 @@ defmodule TokenManager.Application do
       TokenManagerWeb.Telemetry,
       TokenManager.Repo,
       TokenManager.TokenReleaser,
+      {Oban, Application.fetch_env!(:token_manager, Oban)},
       {DNSCluster, query: Application.get_env(:token_manager, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: TokenManager.PubSub},
       # Start the Finch HTTP client for sending emails

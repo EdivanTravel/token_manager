@@ -3,7 +3,9 @@ defmodule TokenManager.Tokens.Token do
   import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
-  @derive {Phoenix.Param, key: :id}
+  @derive {Jason.Encoder,
+           only: [:id, :token, :status, :activated_at, :user_id, :inserted_at, :updated_at]}
+
   schema "tokens" do
     field :token, Ecto.UUID
     field :status, :string, default: "available"
