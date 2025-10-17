@@ -44,6 +44,8 @@ defmodule TokenManager.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
+      {:oban, "~> 2.13.4"},
+      {:ex_machina, "~> 2.7", only: :test}
     ]
   end
 
