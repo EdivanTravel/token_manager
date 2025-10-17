@@ -7,8 +7,17 @@ defmodule TokenManagerWeb.Router do
 
   scope "/api", TokenManagerWeb do
     pipe_through :api
+
+    # Rotas fixas
     get "/tokens", TokenController, :index
+    get "/tokens/available", TokenController, :available
+    get "/tokens/active", TokenController, :active
     post "/tokens/allocate", TokenController, :allocate
+    delete "/tokens/clear-active", TokenController, :clear_active
+
+    # Rotas com parâmetros
+    get "/tokens/:id/history", TokenController, :history
+    get "/tokens/:id", TokenController, :show
     post "/tokens/release/:id", TokenController, :release
   end
 
@@ -20,10 +29,8 @@ defmodule TokenManagerWeb.Router do
     # you can use Plug.BasicAuth to set up some basic authentication
     # as long as you are also using SSL (which you should anyway).
 
-
     scope "/dev" do
       pipe_through [:fetch_session, :protect_from_forgery]
-
 
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end

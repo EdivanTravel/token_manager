@@ -46,3 +46,15 @@ import_config "#{config_env()}.exs"
 config :token_manager, TokenManager.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id]
+
+# Configure Oban for background jobs
+config :token_manager, Oban,
+  repo: TokenManager.Repo,
+  plugins: [
+    {Oban.Plugins.Pruner, max_age: 3600},
+    {Oban.Plugins.Cron,
+     crontab: [
+       {"*/30 * * * *", TokenManager.Tokens.ExpiredTokensCleaner}
+     ]}
+  ],
+  queues: [default: 10]
