@@ -17,7 +17,7 @@ git clone https://github.com/EdivanTravel/token_manager.git
 mix deps.get
 
 
-###  3. Suba os containers (PostgreSQL e aplicação
+###  3. Suba os containers PostgreSQL e aplicação (certifique-se que tenha o docker instalado na sua máquina)
 docker-compose up --build (Isso iniciará o banco de dados PostgreSQL e o servidor Phoenix na porta 4000.)
 
 
@@ -64,7 +64,7 @@ http://localhost:4000
 ### - Exibe o histórico de uso de um determinado token
 ![Exibe o histórico de uso de um determinado token](assets/img/img-5.png)
 
-### - Atribue um token disponível a um usuário
+### - Atribui um token disponível a um usuário
 ![Atribue um token disponível a um usuário](assets/img/img-6.png)
 
 ### - Libera um token específico
@@ -90,6 +90,17 @@ http://localhost:4000
 A limpeza de tokens expirados é feita através de jobs do Oban, executados periodicamente a cada 1 minuto.
 Tokens ativos há mais de 2 minutos são automaticamente liberados.
 
+
+##  Testes Automatizados
+
+O projeto inclui testes para as principais funcionalidades:
+
+
+Para rodar os testes:
+
+```bash
+mix test
+```
 ## Licença
 
 Este projeto foi desenvolvido como desafio técnico backend.
