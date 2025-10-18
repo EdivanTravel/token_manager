@@ -114,7 +114,6 @@ defmodule TokenManager.TokensTest do
 
   describe "allocate_token/1" do
     setup do
-
       insert_list(3, :token, status: "available")
       :ok
     end
@@ -141,14 +140,12 @@ defmodule TokenManager.TokensTest do
     end
 
     test "releases oldest token when no available tokens" do
-
       tokens = Tokens.list_tokens()
 
       Enum.each(tokens, fn token ->
         Tokens.release_token(token)
         {:ok, _} = Tokens.allocate_token(Ecto.UUID.generate())
       end)
-
 
       assert Tokens.list_available_tokens() == []
 
@@ -162,7 +159,6 @@ defmodule TokenManager.TokensTest do
       user_id = Ecto.UUID.generate()
 
       assert {:ok, token} = Tokens.allocate_token(user_id)
-
 
       history = Tokens.get_token_history(token.id)
       assert length(history.history) == 1
@@ -211,10 +207,8 @@ defmodule TokenManager.TokensTest do
     end
   end
 
-
   describe "clear_active_tokens/0" do
     test "clears all active tokens and updates usage history" do
-
       active_tokens =
         for _ <- 1..3 do
           token =
@@ -222,7 +216,6 @@ defmodule TokenManager.TokensTest do
               status: "active",
               user_id: Ecto.UUID.generate()
             })
-
 
           insert(:token_usage, %{
             token_id: token.id,
@@ -233,14 +226,12 @@ defmodule TokenManager.TokensTest do
           token
         end
 
-
       insert_list(2, :token, %{status: "available", user_id: nil})
 
       {:ok, result} = Tokens.clear_active_tokens()
 
       assert result.tokens_cleared == 3
       assert result.usages_updated == 3
-
 
       assert Tokens.list_active_tokens() == []
       assert length(Tokens.list_available_tokens()) == 5
@@ -254,14 +245,12 @@ defmodule TokenManager.TokensTest do
 
   describe "edge cases" do
     test "allocate_token returns error when no tokens exist" do
-
       Repo.delete_all(Token)
 
       assert {:error, :no_tokens_available} = Tokens.allocate_token(Ecto.UUID.generate())
     end
 
     test "cannot allocate token when all are active and transaction fails" do
-     
       :ok
     end
   end

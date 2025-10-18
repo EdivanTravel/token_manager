@@ -8,20 +8,17 @@ defmodule TokenManagerWeb.Endpoint do
     same_site: "Lax"
   ]
 
-
   plug Plug.Static,
     at: "/",
     from: :token_manager,
     gzip: false,
     only: TokenManagerWeb.static_paths()
 
-
   if code_reloading? do
     plug Phoenix.CodeReloader
     plug Phoenix.Ecto.CheckRepoStatus, otp_app: :token_manager
   end
 
- 
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 

@@ -8,7 +8,6 @@ defmodule TokenManagerWeb.Router do
   scope "/api", TokenManagerWeb do
     pipe_through :api
 
-
     get "/tokens", TokenController, :index
     get "/tokens/available", TokenController, :available
     get "/tokens/active", TokenController, :active
@@ -19,9 +18,7 @@ defmodule TokenManagerWeb.Router do
     post "/tokens/release/:id", TokenController, :release
   end
 
-
   if Application.compile_env(:token_manager, :dev_routes) do
-
     scope "/dev" do
       pipe_through [:fetch_session, :protect_from_forgery]
 

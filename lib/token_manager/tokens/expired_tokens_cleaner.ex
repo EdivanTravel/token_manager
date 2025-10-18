@@ -6,7 +6,6 @@ defmodule TokenManager.Tokens.ExpiredTokensCleaner do
 
   @impl Oban.Worker
   def perform(_job) do
-
     expired_time = DateTime.utc_now() |> DateTime.add(-120, :second)
 
     expired_tokens =

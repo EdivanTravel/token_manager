@@ -1,5 +1,4 @@
 defmodule TokenManager.Application do
-
   use Application
 
   @impl true
@@ -14,11 +13,9 @@ defmodule TokenManager.Application do
       TokenManagerWeb.Endpoint
     ]
 
-
     opts = [strategy: :one_for_one, name: TokenManager.Supervisor]
     Supervisor.start_link(children, opts)
   end
-
 
   @impl true
   def config_change(changed, _new, removed) do
