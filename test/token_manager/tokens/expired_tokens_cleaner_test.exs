@@ -1,4 +1,3 @@
-# test/token_manager/tokens/expired_tokens_cleaner_test.exs
 defmodule TokenManager.Tokens.ExpiredTokensCleanerTest do
   use TokenManager.DataCase
 
@@ -9,7 +8,6 @@ defmodule TokenManager.Tokens.ExpiredTokensCleanerTest do
 
   describe "perform/1" do
     test "releases expired tokens and returns success count" do
-     
       expired_time = DateTime.add(DateTime.utc_now(), -121, :second)
 
       expired_token =
