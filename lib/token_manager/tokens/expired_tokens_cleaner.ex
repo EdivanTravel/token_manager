@@ -6,7 +6,7 @@ defmodule TokenManager.Tokens.ExpiredTokensCleaner do
 
   @impl Oban.Worker
   def perform(_job) do
-    # Tokens ativos há mais de 2 minutos
+
     expired_time = DateTime.utc_now() |> DateTime.add(-120, :second)
 
     expired_tokens =
